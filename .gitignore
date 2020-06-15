@@ -33,3 +33,5 @@
 
 /build
 /src/sensors/data
+.vscode/
+src/quiz/ransac/build/
