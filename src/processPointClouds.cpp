@@ -282,16 +282,18 @@ std::vector<typename pcl::PointCloud<PointT>::Ptr> ProcessPointClouds<PointT>::e
     std::vector<std::vector<float>> points; 
     std::vector<typename pcl::PointCloud<PointT>::Ptr> clusters;
 
-    for (auto point: cloud->points) {
-        std::vector<float> p = {point.x, point.y, point.z};
-        points.push_back(p);
-    }
-
-
     KdTree* tree = new KdTree;
-    for (int i = 0; i< points.size(); i++) {
-        tree->insert(points[i], i);
+    for (int i = 0; i < cloud->points.size(); i++) {
+        std::vector<float> p ({cloud->points[i].x, cloud->points[i].y, cloud->points[i].z});
+        points.push_back(p);
+        tree->insert(p, i);
     }
+
+
+    // KdTree* tree = new KdTree;
+    // for (int i = 0; i< points.size(); i++) {
+        // tree->insert(points[i], i);
+    // }
 
   	std::vector<std::vector<int>> clusterIndices = euclideanCluster(points, tree, clusterTolerance);
   	//
