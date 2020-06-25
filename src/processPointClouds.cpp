@@ -299,8 +299,7 @@ std::vector<typename pcl::PointCloud<PointT>::Ptr> ProcessPointClouds<PointT>::e
   	//
   	auto endTime = std::chrono::steady_clock::now();
   	auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
-  	std::cout << "clustering found " << clusterIndices.size() << " and took " << elapsedTime.count() << " milliseconds" << std::endl;
-
+  	
     for (auto getIndices: clusterIndices) {
         typename pcl::PointCloud<PointT>::Ptr cloudCluster (new pcl::PointCloud<PointT>);
 
@@ -315,6 +314,8 @@ std::vector<typename pcl::PointCloud<PointT>::Ptr> ProcessPointClouds<PointT>::e
 
         clusters.push_back(cloudCluster);
     }
+    std::cout << "clustering found " << clusterIndices.size() << " and took " << elapsedTime.count() << " milliseconds" << std::endl;
+
     return clusters;
 }
 
